@@ -1,0 +1,114 @@
+<% layout('../layout') -%>
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>User List</h6>
+        </div>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="list-group list-group-flush card-body px-0 pt-0 pb-2">
+            <div class="container-fluid py-0">
+              <div class="row h-20">
+                <div class="" style="width: 20vw;min-width: 190px;">
+                  <p class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Author</p>
+                </div>
+                <div class="col-3 align-middle text-center">
+                  <p class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Function</p>
+                </div>
+                <div class="col-3 align-middle text-center">
+                  <p class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">State</p>
+                </div>
+              </div>
+            </div>
+            <div class="scroll-y h-500">
+              <% for (let user_i in userlist) { %>
+              <% if (userlist[user_i].active == 0 || userlist[user_i].active == 2) { continue; }%>
+              <div class="accordion-item">
+                <span class="accordion-header list-group-item" id="flush-heading<%= user_i %>">
+                  <div class="container-fluid py-1">
+                    <div class="row h-40">
+                      <div class="collapsed align-middle text-center" style="width: 20vw;min-width: 190px;" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= user_i %>" aria-expanded="false" aria-controls="flush-collapse<%= user_i %>">
+                        <div class="d-flex px-1 py-1">
+                          <div>
+                            <img src=<%= userlist[user_i].url %> class="avatar avatar-sm me-3" alt="user1">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"><%= userlist[user_i].name %></h6>
+                            <!-- <p class="text-xs text-secondary mb-0">john@creative-tim.com</p> -->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3 align-middle text-center" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= user_i %>" aria-expanded="false" aria-controls="flush-collapse<%= user_i %>">
+                        <p class="text-xs font-weight-bold mb-0">Member</p>
+                        <p class="text-xs text-secondary mb-0">BM COMP</p>
+                      </div>
+                      <div class="col-3 align-middle text-center">
+                        <span class="text-secondary text-ms ">
+                          <div class="dropdown">
+                            <% if (shiftlist[user_i][0].workcount==0){%>
+                            <a class="badge badge-sm bg-gradient-secondary" style="margin: 0px;width: 60px;" href="#" role="button" id="dropdownMenuLink-<%= user_i %>" data-bs-toggle="dropdown" aria-expanded="false">
+                              <%= shiftlist[user_i][0].workcount%></a>
+                            <% }else if (shiftlist[user_i][0].workcount==1){%>
+                            <a class="badge badge-sm bg-gradient-warning" style="margin: 0px;width: 60px;" href="#" role="button" id="dropdownMenuLink-<%= user_i %>" data-bs-toggle="dropdown" aria-expanded="false">
+                              <%= shiftlist[user_i][0].workcount%></a>
+                            <% }else{%>
+                            <a class="badge badge-sm bg-gradient-success" style="margin: 0px;width: 60px;" href="#" role="button" id="dropdownMenuLink-<%= user_i %>" data-bs-toggle="dropdown" aria-expanded="false">
+                              <%= shiftlist[user_i][0].workcount%></a>
+                            <%}%>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<%= user_i %>">
+                            <li><a class="dropdown-item">今週 : <%= shiftlist[user_i][0].workcount%></a></li>
+                            <li><a class="dropdown-item">来週 : <%= shiftlist[user_i][1].workcount%></a></li>
+                            <li><a class="dropdown-item">全体 : <%= shiftlist[user_i][2].workcount%></a></li>
+                            </ul>
+                          </div>
+                        </span>
+                      </div>
+                      <div class="col-3 align-middle text-center">
+                        <span class="text-secondary text-ms ">
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+                <div id="flush-collapse<%= user_i %>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%= user_i %>" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body scroll-y pt-0 pb-0" style="max-height: 250px;">
+                    <% if (!shiftlist[user_i][0].shift[0] && !shiftlist[user_i][1].shift[0] && !shiftlist[user_i][2].shift[0]
+                        ) { %>
+                    <p class="text-uppercase text-secondary font-weight-bolder text-gradient text-danger">
+                      not found
+                    </p>
+                    <% } %>
+                    <% for (let week=0;week<3;week++) { %>
+                    <% if (!shiftlist[user_i][week].shift[0]) {continue}%>
+                    <% if (week!=0) { %>
+                    <hr>
+                    <% } %>
+                    <p class="text-uppercase text-gradient text-dark text-xs font-weight-bolder opacity-7" style="margin: 0;">
+                      <% if (week==0){ %>
+                      this week
+                      <% } else if (week==1){ %>
+                      next week
+                      <% } else { %>
+                      after next week
+                      <%}%>
+                          </p>
+                        <%for (let shift of shiftlist[user_i][week].shift) {%>
+                    <p class="text-secondary font-weight-bolder <%= shift.islate==1 ? "text-gradient text-warning": ""%>">
+                      <%- func.shiftview(shift, true) %>
+                    </p>
+                    <% } } %>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

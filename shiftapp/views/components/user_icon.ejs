@@ -1,0 +1,7 @@
+<% if(!url){ var url=""} %>
+<% if(!width){ var width="26"} %>
+<% if(!height){ var height="26"} %>
+<img src="<%= url%>" onError="this.onerror=null;this.style.display='none'" class="bi fa-2x rounded-circle float-start" 
+width="<%= width ? width:"26"%>" 
+height="<%= height ? height:"26"%>" 
+role="img">

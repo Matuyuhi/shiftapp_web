@@ -1,0 +1,214 @@
+html,body {
+    overflow-x: hidden;
+}
+body {
+    background: WhiteSmoke;
+    font-family: sans-serif;
+    /* width: 70vw; */
+    height: 100%;
+    /* margin: 15 auto; */
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+body.iPhone {
+    width: 500px;
+}
+input {
+    font-size: 13px;
+}
+p {
+    margin: 0px 0px 8px;
+}
+
+.scroll.myshift {
+    padding-inline-start: 4px;
+}
+
+.scroll.othershift {
+    padding-inline-start: 4px;
+}
+
+.red {
+    color: brown
+}
+
+text {
+    display: block;
+    width: 100%;
+}
+
+text:nth-child(2n) {
+
+    background-color: rgba(80, 80, 80, 0.2);
+}
+
+span {
+    display: block;
+}
+
+
+.scroll {
+    margin: 5px 0;
+    padding: 0px 0px 0px 0px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* 縦方向にスクロール可能にする */
+}
+
+.myshift {
+    width: 100%;
+    /* ここで個人表示の大きさ */
+    height: 22vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.iPhone.myshift {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.iPhone.other {
+    position:relative;
+    top: 30px;
+    left:0px;
+}
+
+.other {
+    position: relative;
+    top: 5px;
+    left: 0px;
+}
+
+
+
+/* .iPhone.other {
+    left: 400px;
+} */
+
+.othershift {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    /* 画面に合わせる */
+    width: 100%;
+    height: 78vh;
+}
+
+.iPhone.othershift {
+    width: 100%;
+    height: 800px;
+}
+
+.late {
+    color: rgba(190, 92, 50, 0.579);
+}
+
+userlist {
+    position: absolute;
+    top: 50px;
+    left: 400px;
+    width: 150px;
+    /* 横幅を200pxに指定 */
+    height: 200px;
+}
+
+late.name {
+    display: inline-block;
+    width: 100px;
+}
+
+.acd-check {
+    display: none;
+}
+
+.acd-label {
+    background: #333;
+    color: #fff;
+    display: block;
+    margin-bottom: 1px;
+    padding: 10px;
+}
+
+.acd-content {
+    /* border: 1px solid #333; */
+    height: 0;
+    opacity: 0;
+    padding: 0 10px;
+    transition: .5s;
+    visibility: hidden;
+}
+
+.acd-check:checked+.acd-label+.acd-content {
+    height: 200px;
+    opacity: 1;
+    padding: 10px;
+    visibility: visible;
+}
+
+
+
+clock {
+    position: absolute;
+    top: 92px;
+    left: 170px;
+}
+
+.inputcheck {
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+
+
+.button-box {
+    width: 100%;
+    padding: 8px 16px;
+    margin: 16px auto;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+.hidden {
+    display: none;
+}
+
+.message {
+    width: 25%;
+    min-width: 300px;
+    height: 100px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    /* background: rgba(97, 97, 97, 0.8); */
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100px;
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+}
+
+.popup-message {
+    animation: popup 3s forwards;
+}
+
+@keyframes popup {
+    0% {
+        transform: translateX(-30%);
+        opacity: 0;
+    }
+
+    10%,
+    90% {
+        transform: none;
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-30%);
+        opacity: 0;
+        pointer-events: none;
+    }
+}

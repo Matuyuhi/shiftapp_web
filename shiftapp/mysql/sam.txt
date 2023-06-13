@@ -1,0 +1,16 @@
+
+
+//user作成
+CREATE USER 'kinmumaster'@'localhost' IDENTIFIED WITH mysql_native_password BY 'master';
+//データベース作成
+create database kinmuapp;
+//権限確認
+show grants for kinmumaster@localhost;
+//付与
+grant all on kinmuapp.* to kinmumaster@localhost;
+
+
+//更新
+FLUSH PRIVILEGES;
+
+https://www.javadrive.jp/mysql/user/index6.html

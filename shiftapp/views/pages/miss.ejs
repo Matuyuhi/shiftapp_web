@@ -1,0 +1,118 @@
+<% layout('../layout') -%>
+
+<section>
+  <div class="container-fluid py-4">
+    <div class="row">
+      <!-- userlist -->
+      <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+        <div class="card mb-4">
+          <div class="card-header">
+            User
+          </div>
+          <ol class="list-group scroll list-group-vartical scroll-y" style="height:500px; margin: 0px;">
+            <% for (const user of userlist) {%>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto w-200">
+                <img src="<%= user.url%>" onError="this.onerror=null;this.style.display='none'" class="bi fa-2x rounded-circle float-start" width="26" height="26" role="img">
+                <%= user.name %>
+                <!-- ここに備考欄を書ける -->
+              </div>
+              <%if (user.misscount) { %>
+              <span class="badge bg-primary rounded-pill"><%= user.misscount %></span>
+              <% } %>
+            </li>
+            <% } %>
+          </ol>
+
+        </div>
+
+      </div>
+      <!-- misslist -->
+      <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5" style="padding: 0px 5px;">
+        <div class="card">
+          <div class="card-header">
+            Date
+          </div>
+          <nav id="navbar-example3" class="navbar navbar-light bg-light flex-column scroll" style="height:500px;">
+            <ul class="list-group list-group-flush">
+              <nav class="nav flex-column">
+                <% let year = "" %>
+                <% let yearstart = true %>
+                <% let month = "" %>
+                <% let monthstart = true %>
+                <% for (const missdate in misslist){%>
+                <% let splitdate = missdate.split('-') %>
+                <% if(year != splitdate[0]){%>
+                <% year = splitdate[0]; %>
+                <a class="nav-link" style="padding-left: 0px;" href='#<%= year %>'><%= year %>年</a>
+                <% if(!yearstart) { %>
+              </nav>
+              <% } %>
+              <nav class="nav flex-column">
+                <% yearstart=false %>
+                <% } %>
+                <% if(month != splitdate[1]){%>
+                <% month = splitdate[1] %>
+                <a class="nav-link ml-2 my-1" style="text-align: right;" href='#<%= month %>'><%= Number(month) %>月</a>
+                <% if(!monthstart) { %>
+              </nav>
+              <% } %>
+              <nav class="nav flex-column">
+                <% monthstart=false; %>
+                <% } %>
+                <% } %>
+              </nav>
+          </nav>
+          </ul>
+
+          </nav>
+        </div>
+
+      </div>
+      <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-7 col-sm-7 col-7" style="padding: 0px 5px;">
+        <div class="card">
+          <div class="card-header">
+            List
+          </div>
+          <div class="card-body">
+            <div data-spy="scroll" data-target="#navbar-example3" data-offset="0" class="scrollspy-example-2 scroll" style="height:500px;">
+              <% year = "" %>
+              <% month = "" %>
+              <% for (const missdate in misslist){%>
+              <% let splitdate = missdate.split('-') %>
+              <% if(year != splitdate[0]){%>
+              <% year = splitdate[0]; %>
+              <div class="card-header">
+                <h3 id='<%= year %>'><%= year %>年</h3>
+              </div>
+  
+              <% } %>
+              <% if(month != splitdate[1]){%>
+              <% month = splitdate[1]; %>
+              <hr>
+              <div class="card-header" style="padding: 6px 20px;">
+                <h4 style="margin: 3px;" id='<%= month %>'><%= Number(month) %>月</h4>
+              </div>
+  
+              <% } %>
+              <h5 id='<%= missdate %>'>　<%= Number(splitdate[2]) %>日</h5>
+              <% let namelist = misslist[missdate].split("/"); %>
+              <p>
+                <% for (const name of namelist) {%>
+                <% if(name) {%>
+                　・<%= name %><br>
+                <% } %>
+                <% } %>
+              </p>
+              <% } %>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</section>

@@ -1,0 +1,10 @@
+<% layout('../layout') -%>
+<% var head_link = (function () {/*
+  <link rel="stylesheet" href="/stylesheets/error.css">
+  */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
+<% block("head_link").append(head_link) %>
+<div class="text-center">
+  <div class="error mx-auto" data-text="404">404</div>
+  <p class="lead text-gray-800 mb-5"><%= url %> is not found</p>
+  <a href="/">&larr; Back to Home</a>
+</div>

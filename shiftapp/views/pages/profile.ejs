@@ -1,0 +1,106 @@
+<% layout('../layout') -%>
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-md-6 col-lg-5">
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5">
+              <%- include('../components/user_icon.ejs', {url: session.user.data.url, width: "150", height: "150"})%>
+            </div>
+            <div class="col-7">
+              <h2 class=""><%= session.user.data.name %></h2>
+              <h4 class="opacity-6">Member</h4>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          <p class="card-title text-uppercase text-secondary font-weight-bolder">your shift</p>
+        </div>
+        <div class="card-body scroll-y scroll-x h-200">
+          <% for (let week=0;week<3;week++) { %>
+          <% if (!shiftlist[week].shift[0]) {continue}%>
+          <% if (week!=0) { %>
+          <hr>
+          <% } %>
+          <p class="text-uppercase text-gradient text-dark text-xs font-weight-bolder opacity-7" style="margin: 0;">
+            <% if (week==0){ %>
+            this week
+            <% } else if (week==1){ %>
+            next week
+            <% } else { %>
+            after next week
+            <%}%>
+          </p>
+          <% for (let shift of shiftlist[week].shift) {%>
+          <p class="text-secondary font-weight-bolder <%= shift.islate==1 ? "text-gradient text-warning": ""%>">
+            <%- func.shiftview(shift, true) %>
+          </p>
+          <%}}%>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-7">
+      <%# main content %>
+      <div class="card">
+        <div class="card-header">
+          <p class="card-title text-uppercase text-secondary font-weight-bolder">main</p>
+        </div>
+        <div class="card-body">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button border" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  パスワード変更
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <form action="/profile/password" method="post">
+                    <label>New Password</label>
+                    <div class="mb-3">
+                      <input type="password" class="form-control" aria-label="Password" aria-describedby="password-addon" name="password" pattern="^[A-Za-z0-9]+$" placeholder="半角英数" required />
+                    </div>
+                    <label>Retype Password</label>
+                    <div class="mb-3">
+                      <input type="password" class="form-control" aria-label="RetypePassword" aria-describedby="password-addon" name="retype" pattern="^[A-Za-z0-9]+$" placeholder="半角英数" required />
+                    </div>
+                    <div class="text-center">
+                      <input type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" value="Update">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed border" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  画像変更
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <form action="/profile/icon" method="post">
+                    <label>New Icon URL</label>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" aria-label="NewIconUrl" aria-describedby="url-addon" name="updateurl" placeholder="URL" required />
+                    </div>
+                    <div class="text-center">
+                      <input type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" value="Update">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

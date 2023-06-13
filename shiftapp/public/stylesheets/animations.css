@@ -1,0 +1,133 @@
+.ledText {
+    overflow: hidden;
+    position: relative;
+    padding: 5px 0;
+    color: #FFB400;
+    font-size: 20px;
+    font-weight: bold;
+    /* background: #333333; */
+}
+
+/* CSS3グラデーションでドット感を出す */
+.ledText:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* background-image: linear-gradient(#0a0600 1px, transparent 0px), linear-gradient(0, #0a0600 1px, transparent 1px);
+    background-image: -webkit-linear-gradient(#0a0600 1px, transparent 0px), -webkit-linear-gradient(0, #0a0600 1px, transparent 1px); */
+    background-size: 2px 2px;
+    z-index: 10;
+}
+
+/* CSS3アニメーションでスクロール */
+.ledText span {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    -webkit-animation-name: marquee;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 15s;
+    -moz-animation-name: marquee;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-duration: 15s;
+    animation-name: marquee;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 15s;
+}
+
+@-webkit-keyframes marquee {
+    from {
+        -webkit-transform: translate(0%);
+    }
+
+    99%,
+    to {
+        -webkit-transform: translate(-100%);
+    }
+}
+
+@-moz-keyframes marquee {
+    from {
+        -moz-transform: translate(0%);
+    }
+
+    99%,
+    to {
+        -moz-transform: translate(-100%);
+    }
+}
+
+@keyframes marquee {
+    from {
+        transform: translate(0%);
+    }
+
+    99%,
+    to {
+        transform: translate(-100%);
+    }
+}
+
+
+/*== 波紋がふわっと広がる */
+
+.btnripple3 {
+    /*波紋の基点とするためrelativeを指定*/
+    position: relative;
+    /*リンクの形状*/
+    display: inline-block;
+}
+
+/*波形の設定*/
+.btnripple3:hover::before {
+    content: '';
+    /*絶対配置で波形の位置を決める*/
+    position: absolute;
+    left: 30%;
+    top: 0;
+    /*波形の形状*/
+    /* border: 1px solid #333; */
+    background-color: #333;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /*はじめは不透明*/
+    opacity: 1;
+    /*アニメーションの設定*/
+    animation: 1s circleanime2 forwards;
+    z-index: 110001;
+}
+
+/*波形が広がるアニメーション*/
+@keyframes circleanime2 {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(50);
+    }
+}
+
+/*矢印の設定*/
+.btnripple3::after {
+    content: '';
+    /*絶対配置で矢印の位置を決める*/
+    position: absolute;
+    top: 30%;
+    right: -20px;
+    /*矢印の形状*/
+    width: 5px;
+    height: 5px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    transform: rotate(45deg);
+}

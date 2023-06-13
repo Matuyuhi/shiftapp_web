@@ -1,0 +1,390 @@
+<% layout('../layout') -%>
+
+<% var head_link = (function () {/*
+<link rel="stylesheet" href="/stylesheets/tabbar.css">
+<link rel="stylesheet" href="/stylesheets/button.css">
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
+<% block("head_link").append(head_link) %>
+
+<% var header_scripts = (function () {/*<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+  </symbol>
+</svg>
+<script type="text/javascript" src="/javascripts/moment.min.js"></script>
+<script type="text/javascript" src="/javascripts/date.js"></script>
+<script type="text/javascript" src="/javascripts/check_form.js"></script>
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
+
+<% block("header_scripts").append(header_scripts) %>
+
+
+<% if (after_post) {%>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24">
+    <use xlink:href="#check-circle-fill" />
+  </svg>
+  シフトを入力しました
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% }%>
+<!-- 複数入力が成功したかどうかの表示 -->
+<% let weeks=["日", "月", "火" , "水" , "木" , "金" , "土"] %>
+<% if(isAuth) { %>
+<div class="container-fluid">
+  <div class="row">
+    <!-- 左半分(form 個人shift) -->
+    <div class="col-xxl-6 col-xl-6 col-lg-6">
+      <div class="container-fluid" style="padding: 0px;">
+        <div class="row">
+          <!-- form -->
+          <div class="col-7">
+            <div class="card">
+              <div class="card-body">
+                <form action="/" method="post">
+                  <div class="mb-1 row" style="max-width: 300px;">
+                    <label>年月日</label>
+                    <div class="col-xl-8 form-check" style="padding: 0px 5px;">
+                      <input required type="date" name="date" id="inputDate" min="" class="form-control form-control-sm is-invalid" value="<%= olddate %>" onchange="inputCheck()" style="width: 150px; height: 30px;" />
+                      <div class="invalid-feedback" id="inputDate-invalid">
+                        日付を選択してください
+                      </div>
+                      <div class="valid-feedback" id="inputDate-valid">
+                      </div>
+                    </div>
+                  </div>
+                  <div style="padding: 0px;width: 300px;">
+                    <div class="row">
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 col-4 mb-1 row">
+                        <label>出社時刻</label>
+                        <div class="" style="padding: 0px 5px;">
+                          <input required type="text" name="intime" id="inputIntime" class="form-control form-control-sm is-invalid" pattern="[0-9]{2}:[0-9]{2}" placeholder="--:--" style="width: 80px;padding: 0px 5px;" value="<%= oldintime %>" onkeyup="inputCheck()" />
+                          <div class="invalid-feedback" id="inputIntime-invalid">
+                            有効な時刻を入力してください
+                          </div>
+                          <div class="valid-feedback" id="inputIntime-valid">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 col-4 mb-1">
+                        <label>退社時刻</label>
+                        <div class="" style="padding: 0px 5px;">
+                          <input required type="text" name="outtime" id="inputOuttime" class="form-control form-control-sm is-invalid" pattern="[0-9]{2}:[0-9]{2}" placeholder="--:--" style="width: 80px;padding: 0px 5px;" value="<%= oldouttime %>" onkeyup="inputCheck()" />
+                          <div class="invalid-feedback" id="inputOuttime-invalid">
+                            有効な時刻を入力してください
+                          </div>
+                          <div class="valid-feedback" id="inputOuttime-valid">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-3 row" style="max-width: 200px;">
+                    <label>備考</label>
+                    <div class="col-xl-8" style="padding: 0px 5px;">
+                      <input class="form-control form-control-sm" type="text" name="comment" id="inputComment" style="overflow-wrap: anywhere;padding: 0px 0px;width: 150px;" onkeyup="inputCheck()" />
+                    </div>
+                  </div>
+                  <div id="addbutton">
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+          <!-- 入力チェック -->
+          <div class="col-5" style="position: relative;">
+            <div id="check" class="inputcheck"></div>
+            <!-- 表示方法切り替え -->
+
+            <div style="width:180px;position: absolute;bottom: 1em;">
+              <div class="row row-cols-3">
+                <!-- 今週 -->
+                <form id="viewmode1" class="col" style="display: inline" action="/view_change" method="post">
+                  <input type="hidden" name="option" value="now" />
+                  <% if (shift_viewmode=="now"){ %>
+                  <button type="submit" class="btnshine red" disabled>
+                    <% }else{ %>
+                    <button type="submit" class="btnshine">
+                      <% } %>
+                      今週
+                    </button>
+                </form>
+                <!-- 来週 -->
+                <form id="viewmode2" class="col" style="display: inline" action="/view_change" method="post">
+                  <input type="hidden" name="option" value="next" />
+                  <% if (shift_viewmode=="next"){ %>
+                  <button type="submit" class="btnshine red" disabled>
+                    <% }else{ %>
+                    <button type="submit" class="btnshine">
+                      <% } %>
+                      来週
+                    </button>
+                </form>
+                <!-- 全て -->
+                <form id="viewmode3" class="col" style="display: inline" action="/view_change" method="post">
+                  <input type="hidden" name="option" value="all" />
+                  <% if (shift_viewmode=="all"){ %>
+                  <button type="submit" class="btnshine red" disabled>
+                    <% }else{ %>
+                    <button type="submit" class="btnshine">
+                      <% } %>
+                      全て
+                    </button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </br>
+      <!-- 今見ているユーザー -->
+      <input type="hidden" id="view_user1" name="view_user" value="0" form="viewmode1" />
+      <input type="hidden" id="view_user2" name="view_user" value="0" form="viewmode2" />
+      <input type="hidden" id="view_user3" name="view_user" value="0" form="viewmode3" />
+
+      <div class="card" style="background-color: rgba(80, 80, 80, 0.0);">
+        <div class="card-body" style="padding:0px;">
+          <div class="card-header">
+            <h5 class="card-title">個人</h5>
+          </div>
+          <div class="card-text">
+            <!-- 自分のシフトデータの表示 -->
+            <div class="tab-container" id="tab-container">
+              <div id="tab-wrap" class="tab-wrap">
+                <% let misscount = []; %>
+                <% for (let user of users) { %>
+                <% if (!misscount[Number(user.id)]) { %>
+                <% misscount[Number(user.id)] = 0; %>
+                <% } %>
+                <% for (let miss of misslist) { %>
+                <% if (String(user.id) == String(miss.user_id)) { %>
+                <% misscount[Number(user.id)] += 1; %>
+                <% } %>
+                <% } %>
+                <% } %>
+                <!-- 個人のシフトデータの表示 -->
+                <% for(let sorteduser of sorteduserlist){ %>
+                <% for(let user of users){ %>
+                <% if (user.active == 2 && user.workcount==0){%>
+                <!-- active flagが2は個人表示しない-->
+                <% continue; %>
+                <% }%>
+                <% if(sorteduser.name === user.name){ %>
+                <% let name=String(user.name)%>
+                <% let latecount = user.latecount %>
+                <% let workcount = user.workcount%>
+                <!-- 初期値は自分、ここでどこのボタンに何を登録するかを入れてる。 -->
+                <% if (user.id==shift_viewuser) { %>
+                <input id='TABID-<%= user.id %>' type="radio" name="TAB02" class="tab-switch" checked="checked" onchange="viewmode_user('<%= user.id %>')" />
+                <% } else {%>
+                <input id='TABID-<%= user.id %>' type="radio" name="TAB02" class="tab-switch" onchange="viewmode_user('<%= user.id %>')" />
+                <% } %>
+                <% if (user.active == 2){%>
+                <!--例外ユーザーは色変更-->
+                <label class="tab-label" for="TABID-<%= user.id %>" style="background-color: rgba(84, 255, 81, 0.1);margin: 0px 0px;padding: 5px 2px;">
+                  <% } else {%>
+                  <% if (user.workcount==0) { %>
+                  <label class="tab-label" for="TABID-<%= user.id %>" style="background-color: rgba(255, 0, 0, 0.4);margin: 0px 0px;padding: 5px 2px;">
+                    <% } else if (user.workcount==1) { %>
+                    <label class="tab-label" for="TABID-<%= user.id %>" style="background-color: rgba(255, 242, 5, 0.4);margin: 0px 0px;padding: 5px 2px;">
+                      <% } else { %>
+                      <label class="tab-label" for="TABID-<%= user.id %>" style="margin: 0px 0px;padding: 5px 2px;">
+                        <% } %>
+                        <% }%>
+                        <%- include ('../components/user_icon.ejs',{url : sorteduser.url})%>
+                        <%= name %>
+                      </label>
+                      <div id="tab-content" class="tab-content">
+                        出勤 : <%= workcount%> 修正 : <%= latecount %>
+                        <div class="scroll myshift">
+                          <!-- ここからシフト -->
+                          <!-- 週の表示 -->
+
+                          <% for(let shift of info){ %>
+                          <!-- 自分のシフトデータの表示 -->
+                          <% if (shift.user_id==user.id) { %>
+                          <% let year=String(shift.date.getFullYear()) %>
+                          <% let month=String(shift.date.getMonth() + 1).padStart(2,'0') %>
+                          <% let day=String(shift.date.getDate()).padStart(2,'0') %>
+                          <% let weekday=weeks[shift.date.getDay()] %>
+                          <% if(shift.user_id == idnow){ %>
+                          <% let defaultdate=year + "-" + month + "-" + day %>
+                          <!-- 変更中 -->
+                          <% if(shift.post_id==changeid && isChange){ %>
+                          <text>
+                            <button onclick="location.href = '/backbutton'" class="btnshine">戻る</button>
+                            <form action="/update" method="post" style="display: inline">
+                              <button type="submit" class="btnshine">更新</button>
+                              <!-- 年月日 -->
+                              <input required type="date" name="date" style="width:110px;" value=<%=defaultdate %> />
+                              <!-- 出社時刻 -->
+                              <input required type="text" name="intime" value="<%= shift.intime %>" pattern="[0-9]{2}:[0-9]{2}" placeholder="99:99" style="width: 50px;" />
+                              <!-- 退社時刻 -->
+                              <input required type="text" name="outtime" value="<%= shift.outtime %>" pattern="[0-9]{2}:[0-9]{2}" placeholder="99:99" style="width: 50px;" />
+                              <!-- 仕事内容 -->
+                              <input type="text" name="comment" value="<%= shift.comment %>" placeholder="備考" style="width: 250px;" />
+                              <input type="hidden" name="changeid" value=<%=shift.post_id %> />
+                            </form>
+                          </text>
+                          <!-- 変更しない時 -->
+                          <% } else { %>
+                          <% if(shift.user_id===idnow){ %>
+                          <% if (shift.islate==1) {%>
+                          <text class="late">
+                            <% } else {%>
+                            <text>
+                              <% } %>
+                              <% let text = year + "/" + month + "/" + day + " " + weekday + " " + shift.intime.padStart(5,'0') + " " +shift.outtime.padStart(5,'0') + " @" +shift.name + " "+ shift.comment; %>
+                              <div class="container-fluid" style="padding: 0px 0px;width: 97%;">
+                                <div class="row">
+                                  <div class="col-sm-11 col-10" style="padding: 0px 0px 0px 5px;">
+                                    <form style="display: inline" action="/updatebutton" method="post">
+                                      <input type="hidden" name="id" value=<%=shift.post_id %>>
+                                      <button type="submit" class="btnshine">修正</button>
+                                    </form>
+                                    <%= text %>
+                                  </div>
+                                  <div class="col-sm-1 col-2 " style="padding: 0px 0px;width: 45px;">
+                                    <form style="display: inline" action="/delete" method="post" onsubmit="return deletecheck('<%= text %>')">
+                                      <input type="hidden" name="id" value=<%=shift.post_id %>>
+                                      <button type="submit" class="btnshine" style="min-width: 45px;">削除</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                            </text>
+                            <% } %>
+                            <% } %>
+                            <!-- 他の人の表示 -->
+                            <% } else { %>
+                            <% if (shift.islate==1) {%>
+                            <text class="late">
+                              <% } else {%>
+                              <text>
+                                <% } %>
+                                <%= year + "/" + month + "/" + day + " " +weekday + " " +shift.intime.padStart(5,'0') + " " +shift.outtime.padStart(5,'0') + " @" +shift.name + " " + shift.comment %><br>
+                              </text>
+                              <% } %>
+                              <% }%>
+                              <% } %>
+                        </div>
+                      </div>
+                      <% } %>
+                      <% } %>
+                      <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- 全体shift -->
+    <div class="col-xxl-6 col-xl-6 col-lg-6">
+      <div id="other" class="other">
+        <div class="card" style="background-color: rgba(80, 80, 80, 0.0);">
+          <div class="card-body" style="padding:0px;">
+            <div class="card-header">
+              <h5 class="card-title">
+                全体閲覧
+                <!-- コピー用 -->
+                <% let shifttxt="";%>
+                <% for(let kinmu of info){ %>
+                <% let year=String(kinmu.date.getFullYear()) %>
+                <% let month=String(kinmu.date.getMonth() + 1).padStart(2,'0') %>
+                <% let day=String(kinmu.date.getDate()).padStart(2,'0') %>
+                <% let weekday=weeks[kinmu.date.getDay()] %>
+                <% if(kinmu.comment) { %>
+                <% shifttxt += year + "/" + month + "/" + day + "," + weekday + "," +kinmu.intime.padStart(5,'0') + "," + kinmu.outtime.padStart(5,'0') + ",@"+kinmu.name + "," + kinmu.comment + "\n" %>
+                <% } else {%>
+                <% shifttxt += year + "/" + month + "/" + day + "," + weekday + "," +kinmu.intime.padStart(5,'0') + "," + kinmu.outtime.padStart(5,'0') + ",@"+kinmu.name + "\n" %>
+                <% } %>
+                <% } %>
+                <div id="copyTarget" style="display: none;" value=""><%= shifttxt%></div>
+                <button class="btnshine popup" style="white-space: nowrap;" onclick="copybutton()">コピー</button>
+                <div class="message hidden" style="position: absolute;top: -35px;left: 120px;">クリップボードにコピーしました</div>
+              </h5>
+
+            </div>
+
+            <div class="card-text">
+
+              <!-- 全体シフトの表示 -->
+              <ul id="othershift" class="scroll othershift">
+                <% let border = 0 %>
+                <% for(let kinmu of info){ %>
+                <% let year=String(kinmu.date.getFullYear()) %>
+                <% let month=String(kinmu.date.getMonth() + 1).padStart(2,'0') %>
+                <% let day=String(kinmu.date.getDate()).padStart(2,'0') %>
+                <% let weekday = weeks[kinmu.date.getDay()] %>
+                <!-- 今日の表示にボーダーをつける -->
+                <% const today = today_moment.split("-") %>
+                <% const nextday = new Date(today[0],today[1]-1,Number(today[2])+1)%>
+                <% const split_nextday = (nextday.getFullYear()+"-"+(nextday.getMonth() + 1)+"-"+nextday.getDate()).split("-") %>
+                <% if(Number(today[0])==Number(year) && Number(today[1])==Number(month) && Number(today[2])==Number(day) && border==0) { %>
+                <div class="border border-info border-2 rounded">
+                  <% border=1 %>
+                  <% } %>
+                  <% if(Number(split_nextday[0])==Number(year) && Number(split_nextday[1])==Number(month) && Number(today[2])!= Number(day) && border==1) { %>
+                </div>
+                <% border=2 %>
+                <% } %>
+                <!-- 表示 -->
+                <% if (kinmu.active==2){%>
+                <text id="othershift-<%= year %>-<%= month %>-<%= day %>" style="background-color: rgba(88, 255, 47, 0.1);">
+                  <% }else if (kinmu.islate==1) {%>
+                  <text class="late" id="othershift-<%= year %>-<%= month %>-<%= day %>">
+                    <% } else {%>
+                    <text id="othershift-<%= year %>-<%= month %>-<%= day %>">
+                      <% }%>
+                      <%= year + "/" + month + "/" + day + " " + weekday + " " +kinmu.intime.padStart(5,'0') + " " + kinmu.outtime.padStart(5,'0') + " @"+kinmu.name + " " + kinmu.comment %><br>
+                    </text>
+                    <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- もしログイン情報がなければ -->
+<% } else { %>
+<h1>Welcome to the ShiftApp !!</h1>
+<a href="/signin">Sign in now!</a><br><br>
+<a href="/signup">Sign up now!</a>
+<% } %>
+
+
+<% var footer_scripts = (function () {/*
+<script type="text/javascript" src="/javascripts/index.js"></script>
+<script>
+  //今はandroidとiosのデザイン統一
+  if (navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('Android') != -1) {
+    let body = document.getElementsByTagName('body')[0];
+    // body.classList.add('iPhone');
+    // document.getElementById("tab-container").classList.add('iPhone');
+    // document.getElementById("tab-wrap").classList.add('iPhone');
+    document.getElementById("other").classList.add('iPhone');
+    document.getElementById("othershift").classList.add('iPhone');
+  }
+
+  if (navigator.userAgent.indexOf('iPad') > 0) {
+    let body = document.getElementsByTagName('body')[0];
+    body.classList.add('iPad');
+    document.getElementById("other").classList.add('iPhone');
+  }
+</script>
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
+<% block("footer_scripts", footer_scripts) -%>

@@ -1,0 +1,16 @@
+<% layout('../layout') -%>
+<% var head_link = (function () {/*
+<link rel="stylesheet" href="/stylesheets/error.css">
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
+<% block("head_link").append(head_link) %>
+<div class="text-center">
+  <div class="error mx-auto" data-text="500">500</div>
+</div>
+<% if (!message) { var message = ""} %>
+<% if (!error) { var error = null} %>
+<h1><%= message ? message:"" %></h1>
+<% if (error) { %>
+<p><%= error %></p>
+<h2><%= error.status %></h2>
+<pre><%= error.stack %></pre>
+<% } %>

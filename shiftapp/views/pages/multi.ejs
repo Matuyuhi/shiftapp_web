@@ -1,0 +1,30 @@
+<% layout('../layout') -%>
+<% var header_scripts = (function () {/*
+<script type="text/javascript" src="/javascripts/date.js"></script>
+<script type="text/javascript" src="/javascripts/moment.min.js"></script>
+<script type="text/javascript" src="/javascripts/check_form.js"></script>
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
+
+<% block("header_scripts").append(header_scripts) %>
+<div class="container-fluid">
+  <div class="row">
+    <div style="padding: 0px 12px;">
+      <% if(isAuth) { %>
+      <!-- 誰がログインしているかを表示 -->
+      <p>現在　<%= loginuser %> でログイン中です</p>
+      <form action="/multi" method="post" onkeyup="inputCheck()">
+        <textarea name="shifttext" id="shifttext" cols="70" rows="8"></textarea>
+        <div id="addbutton" class="addbutton"></div>
+      </form>
+      <div class="shiftcheck">
+        <p>入力確認</p>
+        <check id="check">入力したシフトが表示されます</check>
+      </div>
+      <% }%>
+    </div>
+  </div>
+</div>
+<% var footer_scripts = (function () {/*
+ <script type="text/javascript" src="/javascripts/multi.js"></script>
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
+<% block("footer_scripts", footer_scripts) -%>

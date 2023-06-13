@@ -1,0 +1,66 @@
+<% layout('../layout') -%>
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Shift Log</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover sorttbl" id="shifttable">
+              <!-- <caption>sorted by update date</caption> -->
+              <thead>
+                <tr>
+                  <th scope="col" >#</th>
+                  <th scope="col" >Update</th>
+                  <th scope="col" >name</th>
+                  <th scope="col" >date</th>
+                  <th scope="col" >in</th>
+                  <th scope="col" >out</th>
+                  <th scope="col">comment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let shift_i=(nowpage-1)*viewrange;shift_i<nowpage*viewrange;shift_i++) { %>
+                  <tr class="<%= shiftlist[shift_i].islate=="1" ? "text-warning":"text-secondary" %> <%= shiftlist[shift_i].ena == "0" ? "delete-line text-danger" : ""%>">
+                    <th scope="row"><%= Number(shift_i) + 1 %></th>
+  
+                    <td class="border"><%- func.formatDateTime(shiftlist[shift_i].updated_at) %></td>
+                    <td><%= shiftlist[shift_i].name %></td>
+                    <td><%- func.getdate(shiftlist[shift_i].date) %></td>
+                    <td><%= shiftlist[shift_i].intime %></td>
+                    <td><%= shiftlist[shift_i].outtime %></td>
+                    <td><%= shiftlist[shift_i].comment %></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <% if (1 < startpage) { %>
+            <li class="page-item">
+              <a class="page-link" href="/table/<%= Number(nowpage)-1 %>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <% } %>
+            <% for (let page_i=startpage;page_i<=endpage;page_i++) {%>
+              <li class="page-item <%= page_i==Number(nowpage) ? "active":""%>"><a class="page-link" href="/table/<%= page_i %>"><%= page_i %></a></li>
+            <% } %>
+            <% if (finallypage >= endpage) { %>
+            <li class="page-item">
+              <a class="page-link" href="/table/<%= Number(nowpage)+1 %>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

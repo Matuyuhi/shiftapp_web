@@ -1,0 +1,397 @@
+:root {
+    --gradient-info-start: rgba(4, 142, 255, 0.813);
+    --gradient-info-end: rgba(35, 250, 111, 0.75);
+}
+
+.text-gradient.text-info {
+    background-image: linear-gradient(300deg, var(--gradient-info-start) 0%, var(--gradient-info-end) 100%);
+}
+
+
+.bg-gradient-info {
+    background-image: linear-gradient(300deg, var(--gradient-info-start) 0%, var(--gradient-info-end) 100%);
+}
+
+.navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
+    background-image: linear-gradient(300deg, var(--gradient-info-start) 0%, var(--gradient-info-end) 100%);
+}
+
+.dropdown.dropdown-hover:hover>.dropdown-menu:before,
+.dropdown .dropdown-menu.show:before {
+    top: 0px;
+}
+
+/* ^前方 $後方 *部分 */
+/* [class="h-"]::after { */
+.h-self::after {
+    height: attr(height px)
+}
+
+.h-0 {
+    height: 0px;
+}
+
+.h-10 {
+    height: 10px;
+}
+
+.h-20 {
+    height: 20px;
+}
+
+.h-30 {
+    height: 30px;
+}
+
+.h-40 {
+    height: 40px;
+}
+
+.h-50 {
+    height: 50px;
+}
+
+.h-60 {
+    height: 60px;
+}
+
+.h-70 {
+    height: 70px;
+}
+
+.h-80 {
+    height: 80px;
+}
+
+.h-90 {
+    height: 90px;
+}
+
+.h-100 {
+    height: 100px;
+}
+
+.h-110 {
+    height: 110px;
+}
+
+.h-120 {
+    height: 120px;
+}
+
+.h-130 {
+    height: 130px;
+}
+
+.h-140 {
+    height: 140px;
+}
+
+.h-150 {
+    height: 150px;
+}
+
+.h-160 {
+    height: 160px;
+}
+
+.h-170 {
+    height: 170px;
+}
+
+.h-180 {
+    height: 180px;
+}
+
+.h-190 {
+    height: 190px;
+}
+
+.h-200 {
+    height: 200px;
+}
+
+.h-210 {
+    height: 210px;
+}
+
+.h-220 {
+    height: 220px;
+}
+
+.h-230 {
+    height: 230px;
+}
+
+.h-240 {
+    height: 240px;
+}
+
+.h-250 {
+    height: 250px;
+}
+
+.h-260 {
+    height: 260px;
+}
+
+.h-270 {
+    height: 270px;
+}
+
+.h-280 {
+    height: 280px;
+}
+
+.h-290 {
+    height: 290px;
+}
+
+.h-300 {
+    height: 300px;
+}
+
+.h-350 {
+    height: 350px;
+}
+
+.h-400 {
+    height: 400px;
+}
+
+.h-450 {
+    height: 450px;
+}
+
+.h-500 {
+    height: 500px;
+}
+
+.h-550 {
+    height: 550px;
+}
+
+.h-600 {
+    height: 600px;
+}
+
+.w-0 {
+    width: 0px;
+}
+
+.w-10 {
+    width: 10px;
+}
+
+.w-20 {
+    width: 20px;
+}
+
+.w-30 {
+    width: 30px;
+}
+
+.w-40 {
+    width: 40px;
+}
+
+.w-50 {
+    width: 50px;
+}
+
+.w-60 {
+    width: 60px;
+}
+
+.w-70 {
+    width: 70px;
+}
+
+.w-80 {
+    width: 80px;
+}
+
+.w-90 {
+    width: 90px;
+}
+
+.w-100 {
+    width: 100px;
+}
+
+.w-110 {
+    width: 110px;
+}
+
+.w-120 {
+    width: 120px;
+}
+
+.w-130 {
+    width: 130px;
+}
+
+.w-140 {
+    width: 140px;
+}
+
+.w-150 {
+    width: 150px;
+}
+
+.w-160 {
+    width: 160px;
+}
+
+.w-170 {
+    width: 170px;
+}
+
+.w-180 {
+    width: 180px;
+}
+
+.w-190 {
+    width: 190px;
+}
+
+.w-200 {
+    width: 200px;
+}
+
+.w-210 {
+    width: 210px;
+}
+
+.w-220 {
+    width: 220px;
+}
+
+.w-230 {
+    width: 230px;
+}
+
+.w-240 {
+    width: 240px;
+}
+
+.w-250 {
+    width: 250px;
+}
+
+.w-260 {
+    width: 260px;
+}
+
+.w-270 {
+    width: 270px;
+}
+
+.w-280 {
+    width: 280px;
+}
+
+.w-290 {
+    width: 290px;
+}
+
+.w-300 {
+    width: 300px;
+}
+
+.error-bg-cover {
+    position: fixed;
+    /* ブラウザの定位置に固定 */
+    background: rgba(0, 0, 0, .7);
+    /* 背景色を半透明の黒色に */
+    width: 100%;
+    /* 要素の横幅を画面全体に */
+    height: 100%;
+    /* 要素の高さを画面全体に */
+    top: 0;
+    /* 要素の固定位置をブラウザ最上部に合わせる */
+    left: 0;
+    /* 要素の固定位置をブラウザ左側に合わせる */
+    z-index: 10000;
+    /* 要素をコンテンツより前面に（要調整） */
+}
+
+.error-bg-cover .error-text {
+    position: fixed;
+}
+
+.scroll-x {
+    overflow-x: auto;
+}
+
+.scroll-y {
+    overflow-y: auto;
+}
+
+.scroll-x-hidden {
+    overflow-x: hidden;
+}
+
+.scroll-y-hidden {
+    overflow-y: hidden;
+}
+
+/* svg .circle {
+  position: relative;
+  width: 150px;
+  height: 150px;
+} */
+svg circle {
+    position: relative;
+    fill: none;
+    stroke-width: 10;
+    stroke: #f3f3f3;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+}
+
+svg circle.line {
+    stroke-dashoffset: 440px;
+    stroke: #03a9f4;
+}
+
+.box .percent .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box .percent .number .title {
+    font-size: 50px;
+}
+
+.box .percent .number .unit {
+    font-size: 22px;
+    text-align: bottom;
+}
+
+.box .text {
+    padding: 0 0 5 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+.delete-line {
+    color: var(--bs-danger);
+    text-decoration: line-through ;
+}
+
+.v-center {
+    vertical-align: middle;
+}
+.h-center {
+    text-align: center;
+}
