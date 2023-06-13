@@ -52,6 +52,6 @@ services:
     working_dir: /shiftapp
 
     depends_on:
-      - db
+      - shiftappdb
 
     command: make pm2
