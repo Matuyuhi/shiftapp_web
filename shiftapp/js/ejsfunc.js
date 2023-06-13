@@ -53,5 +53,5 @@ exports.getToken = function (_id) {
     expiresIn: '1days',
   }
   const token = jwt.sign(payload, SECRET_KEY, option)
-  return 'https://shift.bmcomp.net/setting/repass/' + token
+  return 'https://yuhi.tokyo/demo/shiftapp/setting/repass/' + token
 }

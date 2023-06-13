@@ -335,14 +335,13 @@ router.post('/hello/post', function (req, res) {
 
 router.get('/setting/repass/gettoken/:id', async function (req, res) {
   try {
-    const payload = {
-      id: Number(req.params.id),
-    }
-    const option = {
-      expiresIn: '1days',
-    }
-    const token = jwt.sign(payload, SECRET_KEY, option)
-    console.log('https://shift.bmcomp.net/setting/repass/' + token)
+    // const payload = {
+    //   id: Number(req.params.id),
+    // }
+    // const option = {
+    //   expiresIn: '1days',
+    // }
+    // const token = jwt.sign(payload, SECRET_KEY, option)
     return res.redirect('/')
   } catch (err) {
     console.log(err)
