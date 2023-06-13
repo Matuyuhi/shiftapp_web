@@ -45,6 +45,12 @@ CREATE TABLE `sortuser` (
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+LOCK TABLES `sortuser` WRITE;
+/*!40000 ALTER TABLE `sortuser` DISABLE KEYS */;
+INSERT INTO `sortuser` VALUES (1,'demo'),(2,'master');
+/*!40000 ALTER TABLE `sortuser` ENABLE KEYS */;
+UNLOCK TABLES;
+
 CREATE TABLE `users` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -54,7 +60,12 @@ CREATE TABLE `users` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- INSERT INTO `users` VALUES ;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (45,'demo','fe01ce2a7fbac8fafaed7c982a04e229',1),(46,'master','eb0a191797624dd3a48fa681d3061212',3);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 CREATE TABLE `user_icon` (
   `id` int,
@@ -62,8 +73,6 @@ CREATE TABLE `user_icon` (
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `weekcount`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `weekcount` (
   `user_id` int NOT NULL,
   `workcount` int DEFAULT '0',

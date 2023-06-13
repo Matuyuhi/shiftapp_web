@@ -24,6 +24,7 @@
               </thead>
               <tbody>
                 <% for (let shift_i=(nowpage-1)*viewrange;shift_i<nowpage*viewrange;shift_i++) { %>
+                  <%if (!shiftlist[shift_i]) { continue; }%>
                   <tr class="<%= shiftlist[shift_i].islate=="1" ? "text-warning":"text-secondary" %> <%= shiftlist[shift_i].ena == "0" ? "delete-line text-danger" : ""%>">
                     <th scope="row"><%= Number(shift_i) + 1 %></th>
   

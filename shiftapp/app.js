@@ -23,7 +23,7 @@ const indexRouter = require('./routes/index')
 const signinRouter = require('./routes/signin')
 const signupRouter = require('./routes/signup')
 const multiRouter = require('./routes/multi')
-const missRouter = require('./routes/miss')
+// const missRouter = require('./routes/miss')
 const usersRouter = require('./routes/users')
 const tableRouter = require('./routes/table')
 const profileRouter = require('./routes/profile')
@@ -33,8 +33,7 @@ const iosRouter = require('./routes/ios')
 
 let userlist = []
 app.locals.eslint = ''
-// app.locals.hostname = 'http://localhost:3000'
-app.locals.hostname = 'https://shift.bmcomp.net'
+app.locals.hostname = 'http://localhost:9156'
 
 //listen
 app.listen(port, () => {
@@ -155,7 +154,8 @@ app.use('/', indexRouter)
 //app.use('/2', index2Router);
 app.use('/multi', multiRouter)
 
-app.use('/miss', missRouter)
+// demo用
+// app.use('/miss', missRouter)
 
 app.use('/users', usersRouter)
 

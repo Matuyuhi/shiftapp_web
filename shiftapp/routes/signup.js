@@ -27,17 +27,18 @@ router.post('/', async function (req, res) {
   const connection = mysql.createConnection(config.connect)
   try {
     await mysqlPromise.beginTransaction(connection)
-    const users = await mysqlPromise.query(
-      connection,
-      'select * from adduser where name=?',
-      [username]
-    )
-    if (!users || !users[0]) {
-      return res.render('signup', {
-        title: 'Sign up',
-        errorMessage: ['お前は誰だ??'],
-      })
-    }
+    // データベースに登録されているか確かめる
+    // const users = await mysqlPromise.query(
+    //   connection,
+    //   'select * from adduser where name=?',
+    //   [username]
+    // )
+    // if (!users || !users[0]) {
+    //   return res.render('signup', {
+    //     title: 'Sign up',
+    //     errorMessage: ['お前は誰だ??'],
+    //   })
+    // }
     let result = await mysqlPromise.query(
       connection,
       'select * from users where name=? and active > 0',
@@ -71,10 +72,14 @@ router.post('/', async function (req, res) {
           [id, url]
         )
         let list = await shiftFunc.getSortUser()
-        await shiftFunc.addSortUser(
-          Number(list[list.length - 1].id) + 1,
-          username
-        )
+        if (list.length == 0 || !list) {
+          await shiftFunc.addSortUser(1, username)
+        } else {
+          await shiftFunc.addSortUser(
+            Number(list[list.length - 1].id) + 1,
+            username
+          )
+        }
         await mysqlPromise.commit(connection)
       }
 
