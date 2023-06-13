@@ -1,9 +1,9 @@
 version: '3'
 services:
-  db:
+  shiftappdb:
     image: mysql:8.0.32-debian
     platform: linux/amd64
-    container_name: db-container
+    container_name: shiftapp-db
 
     command: mysqld --innodb_use_native_aio=0
 
@@ -27,13 +27,13 @@ services:
       # data
       - ./db/data:/var/lib/mysql
 
-  app:
+  shiftappDemo:
     image: node:latest
     container_name: shiftweb_app
 
     # デモなので直書き
     environment:
-      - MYSQL_HOST=db
+      - MYSQL_HOST=shiftappdb
       - TZ=Asia/Tokyo
       - SHIFTAPP_DEV=dev
       - PORT=9156
