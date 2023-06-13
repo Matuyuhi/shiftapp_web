@@ -11,11 +11,14 @@ services:
       - MYSQL_ROOT_HOST=%
       - MYSQL_ROOT_PASSWORD=master
       - TZ=Asia/Tokyo
+      - MYSQL_TCP_PORT=9157
 
 
     ports:
-      - '3306:3306'
-      - '33060:33060'
+      - '9157:3306'
+      # - '33060:33060'
+    expose:
+      - 9157
 
     volumes:
       - ./db/init.d:/docker-entrypoint-initdb.d
@@ -36,6 +39,7 @@ services:
       - PORT=9156
       - MYSQL_USERNAME=shiftmaster
       - MYSQL_PASSWORD=master
+      - MYSQL_PORT=9157
 
     tty: true
 
