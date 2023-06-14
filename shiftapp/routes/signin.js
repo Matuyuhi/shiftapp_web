@@ -37,7 +37,7 @@ router.post('/', async function (req, res) {
       //ログイン成功時の処理
       req.session.userid = results[0].id
       req.session.user = null
-      return res.redirect('/')
+      return res.redirect('/demo/shift/')
     }
   } catch (err) {
     console.log(err)

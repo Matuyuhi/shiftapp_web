@@ -4,7 +4,7 @@ const router = express.Router()
 const shiftfunc = require('../js/shiftfunc')
 router.use(function (req, res, next) {
   if (!req.session.user.data.id || req.session.user.data.active != 3) {
-    return res.redirect('/')
+    return res.redirect('/demo/shift/')
   } else {
     next()
   }
@@ -51,7 +51,7 @@ router.post('/', async function (req, res) {
         }
       }
     }
-    res.redirect('/setting')
+    res.redirect('/demo/shift/setting')
   } catch (err) {
     console.log(err)
   }
@@ -62,7 +62,7 @@ router.post('/adduser', async function (req, res) {
     if (req.body.adduser) {
       await shiftfunc.setAddUser(req.body.adduser)
     }
-    res.redirect('/setting')
+    res.redirect('/demo/shift/setting')
   } catch (err) {
     console.log(err)
   }
@@ -73,7 +73,7 @@ router.get('/deleteuser/:name', async function (req, res) {
     if (req.params.name) {
       await shiftfunc.deleteAddUser(req.params.name)
     }
-    res.redirect('/setting')
+    res.redirect('/demo/shift/setting')
   } catch (err) {
     console.log(err)
   }
@@ -84,7 +84,7 @@ router.post('/sort', async function (req, res) {
     if (req.body.sort) {
       await shiftfunc.setSortUser(req.body.sort.split('\r\n'))
     }
-    res.redirect('/setting')
+    res.redirect('/demo/shift/setting')
   } catch (err) {
     console.log(err)
   }

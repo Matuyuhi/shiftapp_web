@@ -108,18 +108,18 @@ app.use(async function (req, res, next) {
     await mysqlPromise.beginTransaction(connection)
     res.locals.session = req.session
     if (
-      String(req.originalUrl).match('/ios') ||
-      String(req.originalUrl).match('/hello') ||
-      String(req.originalUrl).match('/setting/repass') ||
-      req.originalUrl == '/logout' ||
-      req.originalUrl == '/signin' ||
-      req.originalUrl == '/signup'
+      String(req.originalUrl).match('/demo/shift/ios') ||
+      String(req.originalUrl).match('/demo/shift/hello') ||
+      String(req.originalUrl).match('/demo/shift/setting/repass') ||
+      req.originalUrl == '/demo/shift/logout' ||
+      req.originalUrl == '/demo/shift/signin' ||
+      req.originalUrl == '/demo/shift/signup'
     ) {
       return next()
     }
     let userid = req.session.userid
     if (!userid || userid == 0) {
-      return res.redirect('/logout')
+      return res.redirect('/demo/shift/logout')
     }
     //console.log(res.locals)
     const results = await mysqlPromise.query(
@@ -129,7 +129,7 @@ app.use(async function (req, res, next) {
     )
     //console.log(results)
     if (!results || !results[0]) {
-      return res.redirect('/logout')
+      return res.redirect('/demo/shift/logout')
     } else {
       //console.log(results)
       req.session.user = {}
@@ -144,26 +144,26 @@ app.use(async function (req, res, next) {
   }
 })
 
-app.use('/signup', signupRouter)
+app.use('/demo/shift/signup', signupRouter)
 
-app.use('/ios', iosRouter)
+app.use('/demo/shift/ios', iosRouter)
 
-app.use('/signin', signinRouter)
+app.use('/demo/shift/signin', signinRouter)
 
-app.use('/', indexRouter)
+app.use('/demo/shift/', indexRouter)
 //app.use('/2', index2Router);
-app.use('/multi', multiRouter)
+app.use('/demo/shift/multi', multiRouter)
 
 // demo用
-// app.use('/miss', missRouter)
+// app.use('/demo/shift/miss', missRouter)
 
-app.use('/users', usersRouter)
+app.use('/demo/shift/users', usersRouter)
 
-app.use('/table', tableRouter)
+app.use('/demo/shift/table', tableRouter)
 
-app.use('/profile', profileRouter)
+app.use('/demo/shift/profile', profileRouter)
 
-app.use('/setting', settingRouter)
+app.use('/demo/shift/setting', settingRouter)
 
 /*
 ここで月曜の8時にして、misslistにカウントしていく

@@ -9,7 +9,7 @@ const shiftfunc = require('../js/shiftfunc')
 
 router.use(function (req, res, next) {
   if (!req.session.user.data.id) {
-    return res.redirect('/')
+    return res.redirect('/demo/shift/')
   } else {
     next()
   }
@@ -45,7 +45,7 @@ router.post('/:set', async function (req, res) {
         req.session.user = {}
       }
     }
-    return res.redirect('/profile')
+    return res.redirect('/demo/shift/profile')
   } catch (err) {
     console.log(err)
   }

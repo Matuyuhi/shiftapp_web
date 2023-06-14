@@ -56,7 +56,7 @@ router.get('/', async function (req, res) {
         [userId]
       )
       if (!results || !results[0]) {
-        res.redirect('/logout')
+        res.redirect('/demo/shift/logout')
       } else {
         loginuser = results[0].name
       }
@@ -199,7 +199,7 @@ router.post('/', async function (req, res) {
   } catch (err) {
     console.log('index.js router.post error\n' + err)
   } finally {
-    res.redirect('/')
+    res.redirect('/demo/shift/')
   }
 })
 
@@ -216,7 +216,7 @@ router.post('/view_change', function (req, res) {
   if (req.body.view_user && req.body.view_user != 0) {
     req.session.shift_viewuser = req.body.view_user
   }
-  res.redirect('/')
+  res.redirect('/demo/shift/')
 })
 
 //投稿の修正ボタンを押したときの処理
@@ -224,7 +224,7 @@ router.post('/updatebutton', function (req, res) {
   req.session.isChange = true
   req.session.changeid = req.body.id
   req.session.shift_viewuser = req.session.userid
-  res.redirect('/')
+  res.redirect('/demo/shift/')
 })
 
 //投稿の修正
@@ -247,7 +247,7 @@ router.post('/update', async function (req, res) {
       comment,
       changeid
     )
-    res.redirect('/')
+    res.redirect('/demo/shift/')
   } catch (err) {
     console.log(err)
   } finally {
@@ -259,7 +259,7 @@ router.post('/update', async function (req, res) {
 router.get('/backbutton', function (req, res) {
   req.session.isChange = false
   req.session.shift_viewuser = req.session.userid
-  res.redirect('/')
+  res.redirect('/demo/shift/')
 })
 
 //投稿の削除
@@ -275,7 +275,7 @@ router.post('/delete', async function (req, res) {
       [changeid]
     )
     await mysqlPromise.commit(connection)
-    res.redirect('/')
+    res.redirect('/demo/shift/')
   } catch (err) {
     console.log(err)
   } finally {
@@ -312,7 +312,7 @@ router.get('/logout', function (req, res) {
   //セッション情報を破棄
   req.session = null
   res.locals.user = {}
-  res.redirect('/signin')
+  res.redirect('/demo/shift/signin')
 })
 
 // router.get('/err', function (req, res) {
@@ -342,7 +342,7 @@ router.get('/setting/repass/gettoken/:id', async function (req, res) {
     //   expiresIn: '1days',
     // }
     // const token = jwt.sign(payload, SECRET_KEY, option)
-    return res.redirect('/')
+    return res.redirect('/demo/shift/')
   } catch (err) {
     console.log(err)
   }
@@ -359,11 +359,11 @@ router.get('/setting/repass/:token', async function (req, res) {
         token: req.params.token,
       })
     } else {
-      return res.redirect('/')
+      return res.redirect('/demo/shift/')
     }
   } catch (err) {
     //console.log(err)
-    return res.redirect('/')
+    return res.redirect('/demo/shift/')
   }
 })
 
@@ -381,7 +381,7 @@ router.post('/setting/repass/:token', async function (req, res) {
   } catch (err) {
     console.log(err)
   } finally {
-    res.redirect('/')
+    res.redirect('/demo/shift/')
   }
 })
 

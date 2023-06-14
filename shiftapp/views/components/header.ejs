@@ -11,9 +11,9 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+        <!-- <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
           <%= page %>
-        </li>
+        </li> -->
       </ol>
       <h6 class="font-weight-bolder mb-0"><%= page %></h6>
     </nav>
@@ -37,7 +37,7 @@
             <span class="d-sm-inline d-none"><%= session.user.data.name %></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+            <li><a class="dropdown-item" href="/demo/shift/profile">Profile</a></li>
             <!-- <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SettingModal">Setting</a></li> -->
             <li>
               <hr class="dropdown-divider">
@@ -73,7 +73,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          <a type="button" class="btn btn-primary" href="/logout">Yes</a>
+          <a type="button" class="btn btn-primary" href="/demo/shift/logout">Yes</a>
         </div>
       </div>
     </div>

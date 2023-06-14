@@ -19,7 +19,7 @@ router.get('/', async function (req, res) {
         [userId]
       )
       if (!results || !results[0]) {
-        res.redirect('/logout')
+        res.redirect('/demo/shift/logout')
       } else {
         loginuser = results[0].name
       }
@@ -38,7 +38,7 @@ router.get('/', async function (req, res) {
 router.post('/', async function (req, res) {
   try {
     if (!req.body || !req.body.shifttext) {
-      return res.redirect('/multi')
+      return res.redirect('/demo/shift/multi')
     }
     let inputValue = req.body.shifttext
     let text = String(inputValue).replace(/\r\n|\r/g, '\n')
@@ -82,7 +82,7 @@ router.post('/', async function (req, res) {
   } catch (err) {
     console.log(err)
   } finally {
-    res.redirect('/')
+    res.redirect('/demo/shift/')
   }
 })
 

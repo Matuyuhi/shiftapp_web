@@ -84,7 +84,7 @@ router.post('/', async function (req, res) {
       }
 
       //セッション情報を導入
-      return res.redirect('/signin')
+      return res.redirect('/demo/shift/signin')
     } else {
       return res.render('signup', {
         title: 'Sign up',

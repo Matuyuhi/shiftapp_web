@@ -74,7 +74,7 @@ router.get('/', async function (req, res) {
 
 router.get('/:pageid', function (req, res) {
   req.session.tableId = Number(req.params.pageid)
-  res.redirect('/table')
+  res.redirect('/demo/shift/table')
 })
 
 module.exports = router

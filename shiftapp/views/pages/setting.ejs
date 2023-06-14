@@ -18,7 +18,7 @@
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <form action="/setting" method="post">
+                  <form action="/demo/shift/setting" method="post">
                     <div class="text-center">
                       <input type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0" value="UPDATE">
                     </div>
@@ -142,12 +142,12 @@
                 <div class="accordion-body">
                   <% for (let user of addlist) { %>
                   <p class=""><%= user.name %>
-                    <a class="btn btn-outline-info" href="/setting/deleteuser/<%= user.name %>">
+                    <a class="btn btn-outline-info" href="/demo/shift/setting/deleteuser/<%= user.name %>">
                       <span class="text-center">削除</span>
                     </a>
                   </p>
                   <% } %>
-                  <form action="/setting/adduser" method="post">
+                  <form action="/demo/shift/setting/adduser" method="post">
                     <label>
                       User Name
                     </label>
@@ -170,7 +170,7 @@
               <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <h6>上から順にソート</h6>
-                  <form action="/setting/sort" method="post">
+                  <form action="/demo/shift/setting/sort" method="post">
                     <div class="container-fluid">
                       <div class="row">
                         <textarea id="textarea-sort" name="sort" id="" cols="30" rows="10" class="col-8"><%- func.listToText(sortlist) %></textarea>

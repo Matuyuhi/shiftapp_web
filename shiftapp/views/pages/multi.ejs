@@ -12,7 +12,7 @@
       <% if(isAuth) { %>
       <!-- 誰がログインしているかを表示 -->
       <p>現在　<%= loginuser %> でログイン中です</p>
-      <form action="/multi" method="post" onkeyup="inputCheck()">
+      <form action="/demo/shift/multi" method="post" onkeyup="inputCheck()">
         <textarea name="shifttext" id="shifttext" cols="70" rows="8"></textarea>
         <div id="addbutton" class="addbutton"></div>
       </form>
