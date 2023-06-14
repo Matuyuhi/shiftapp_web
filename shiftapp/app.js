@@ -66,7 +66,6 @@ app.use(
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views/pages'))
-app.use(express.static(path.join(__dirname, 'public')))
 app.set('view engine', 'ejs')
 app.engine('ejs', engine)
 app.locals.func = ejsfunc
@@ -99,7 +98,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname + 'demo/shift/', 'public')))
 
 app.use(async function (req, res, next) {
   const connection = mysql.createConnection(config.connect)
@@ -143,7 +142,7 @@ app.use(async function (req, res, next) {
     connection.end()
   }
 })
-
+app.use('/demo/shift', express.static('public'))
 app.use('/demo/shift/signup', signupRouter)
 
 app.use('/demo/shift/ios', iosRouter)

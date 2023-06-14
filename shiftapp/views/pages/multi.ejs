@@ -1,8 +1,8 @@
 <% layout('../layout') -%>
 <% var header_scripts = (function () {/*
-<script type="text/javascript" src="/javascripts/date.js"></script>
-<script type="text/javascript" src="/javascripts/moment.min.js"></script>
-<script type="text/javascript" src="/javascripts/check_form.js"></script>
+<script type="text/javascript" src="/demo/shift/javascripts/date.js"></script>
+<script type="text/javascript" src="/demo/shift/javascripts/moment.min.js"></script>
+<script type="text/javascript" src="/demo/shift/javascripts/check_form.js"></script>
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
 
 <% block("header_scripts").append(header_scripts) %>
@@ -25,6 +25,6 @@
   </div>
 </div>
 <% var footer_scripts = (function () {/*
- <script type="text/javascript" src="/javascripts/multi.js"></script>
+ <script type="text/javascript" src="/demo/shift/javascripts/multi.js"></script>
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]; %>
 <% block("footer_scripts", footer_scripts) -%>
