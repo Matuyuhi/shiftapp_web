@@ -142,11 +142,6 @@ app.use(async function (req, res, next) {
     connection.end()
   }
 })
-app.use('/demo/shift/assets', express.static('public/assets'))
-app.use('/demo/shift/images', express.static('public/images'))
-app.use('/demo/shift/javascripts', express.static('public/javascripts'))
-app.use('/demo/shift/stylesheets', express.static('public/stylesheets'))
-app.use('/demo/shift/favicon.ico', express.static('public/favicon.ico'))
 
 app.use('/demo/shift/signup', signupRouter)
 
