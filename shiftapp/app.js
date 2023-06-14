@@ -98,7 +98,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname + 'demo/shift/', 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(async function (req, res, next) {
   const connection = mysql.createConnection(config.connect)
@@ -142,7 +142,12 @@ app.use(async function (req, res, next) {
     connection.end()
   }
 })
-app.use('/demo/shift', express.static('public'))
+app.use('/demo/shift/assets', express.static('public/assets'))
+app.use('/demo/shift/images', express.static('public/images'))
+app.use('/demo/shift/javascripts', express.static('public/javascripts'))
+app.use('/demo/shift/stylesheets', express.static('public/stylesheets'))
+app.use('/demo/shift/favicon.ico', express.static('public/favicon.ico'))
+
 app.use('/demo/shift/signup', signupRouter)
 
 app.use('/demo/shift/ios', iosRouter)
