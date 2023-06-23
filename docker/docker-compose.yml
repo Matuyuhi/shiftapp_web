@@ -20,6 +20,8 @@ services:
     expose:
       - 9157
 
+    restart: always
+
     volumes:
       - ./db/init.d:/docker-entrypoint-initdb.d
       - ./db/conf/my.conf:/etc/mysql/conf.d/my.conf:ro
@@ -42,6 +44,8 @@ services:
       - MYSQL_PORT=9157
 
     tty: true
+
+    restart: always
 
     ports:
       - '9156:9156'
